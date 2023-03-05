@@ -43,8 +43,6 @@ def main():
                 except Exception as exception:
                     print("Fails neeksistē", str(exception))
                     return
-        else:
-            print("Nepareiza ievade!")
 
         # account for github input inprecision
         # call the function and output it's result
