@@ -6,16 +6,15 @@ import numpy
 def compute_height(n, parents):
     koks = [[] for i in range(n)]
     for i in range(n):
-        parent_garums = parents[i]
-        if parent_garums == -1:
+        if parents[i] == -1:
             root_garums = i
         else:
-            koks[parent_garums].append(i)
+            koks[parents[i]].append(i)
 
     def atrast(mezgls):
         if not koks[mezgls]:
-            return 1
-        return max(atrast(child) for child in koks[mezgls])
+            return i
+        return 1 + max(atrast(child) for child in koks[mezgls])
     return atrast(root_garums)
 
 def main():
@@ -28,18 +27,18 @@ def main():
         parents = list(map(int, input().split()))
     if "F" in ievade:
         faila_nosaukums = input()
-        path = 'test/'
+        mape = 'test/'
         # let user input file name to use, don't allow file names with letter a
         if "a" in faila_nosaukums:
             return
         else:
             # Nolasa vērtības no faila
             try:
-                with open(path + faila_nosaukums, 'r') as fails:
+                with open(mape + faila_nosaukums, 'r') as fails:
                     n = int(fails.readline())
                     parents = list(map(int, fails.readline().split()))
             except Exception as exception:
-                print("Fails neeksiste", str(exception))
+                print("Fails neeksistē", str(exception))
                 return
 
     # account for github input inprecision
