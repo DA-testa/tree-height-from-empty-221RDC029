@@ -11,7 +11,7 @@ def compute_height(n, parents):
     for i in range(n):
         parent_garums = parents[i]
         if parent_garums == -1:
-            root_garums = i
+            root_garums = -1
         else:
             koks[parent_garums].append(i)
 
@@ -29,7 +29,7 @@ def main():
          # input number of elements
         n = int(input())
     # input values in one variable, separate with space, split these values in an array
-        vertibas = list(map(int, input().split()))
+        parents = list(map(int, input().split()))
     if "F" in ievade:
         faila_nosaukums = input()
         path = 'test/'
