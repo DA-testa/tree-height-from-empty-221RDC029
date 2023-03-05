@@ -29,7 +29,7 @@ def main():
         parents = list(map(int, input().split()))
     if "F" in ievade:
         faila_nosaukums = input()
-        mape = './test/'
+        mape = 'test/'
         # let user input file name to use, don't allow file names with letter a
         if "a" in faila_nosaukums:
             return
