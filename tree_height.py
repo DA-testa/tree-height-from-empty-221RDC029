@@ -11,7 +11,7 @@ def compute_height(n, parents):
     for i in range(n):
         parent_garums = parents[i]
         if parent_garums == -1:
-            root_garums = -1
+            root_garums = i
         else:
             koks[parent_garums].append(i)
 
