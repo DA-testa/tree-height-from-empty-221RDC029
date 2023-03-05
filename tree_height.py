@@ -1,26 +1,26 @@
 # python3
-
 import sys
 import threading
 import numpy
 
 def compute_height(n, parents):
-    # Izveido masīvu, kur saglabāt vērtības
     koks = [[] for i in range(n)]
-    # Piešķir parent_garums vērtību - ja tas ir vienāds ar -1, tad tas būs sākums
     for i in range(n):
         parent_garums = parents[i]
         if parent_garums == -1:
-            root_garums = -1
+            root_garums = i
         else:
             koks[parent_garums].append(i)
 
-    def atrast(node):
-        if not koks[node]:
-            return 1
-        garums = [atrast(child) for child in koks[node]]
-        return 1 + max(garums)
-    return atrast(root_garums)
+    stack = [(root_garums, 1)]
+    max_garums = 1
+    while stack:
+        node, depth = stack.pop()
+        max_garums = max(max_garums, depth)
+        for child in koks[node]:
+            stack.append((child, depth+1))
+    
+    return max_garums
 
 def main():
     # implement input form keyboard and from files
@@ -42,13 +42,11 @@ def main():
                 with open(path + faila_nosaukums, 'r') as file:
                     n = int(file.readline())
                     parents = list(map(int, file.readline().split()))
-                    
             except Exception as ex:
                 print("Fails neeksiste", str(ex))
                 return
 
     # account for github input inprecision
-
     # call the function and output it's result
     result = compute_height(n, parents)
     print(result)
