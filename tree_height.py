@@ -12,15 +12,11 @@ def compute_height(n, parents):
         else:
             koks[parent_garums].append(i)
 
-    stack = [(root_garums, 1)]
-    max_garums = 1
-    while stack:
-        node, depth = stack.pop()
-        max_garums = max(max_garums, depth)
-        for child in koks[node]:
-            stack.append((child, depth+1))
-    
-    return max_garums
+    def atrast(mezgls):
+        if not koks[mezgls]:
+            return 1
+        return max(atrast(child) for child in koks[mezgls])
+    return atrast(root_garums)
 
 def main():
     # implement input form keyboard and from files
@@ -39,18 +35,17 @@ def main():
         else:
             # Nolasa vērtības no faila
             try:
-                with open(path + faila_nosaukums, 'r') as file:
-                    n = int(file.readline())
-                    parents = list(map(int, file.readline().split()))
-            except Exception as ex:
-                print("Fails neeksiste", str(ex))
+                with open(path + faila_nosaukums, 'r') as fails:
+                    n = int(fails.readline())
+                    parents = list(map(int, fails.readline().split()))
+            except Exception as exception:
+                print("Fails neeksiste", str(exception))
                 return
 
     # account for github input inprecision
     # call the function and output it's result
     result = compute_height(n, parents)
     print(result)
-
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
 # of bigger stack, we have to launch the computation in a new thread.
