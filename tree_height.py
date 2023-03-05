@@ -6,22 +6,47 @@ import numpy
 
 
 def compute_height(n, parents):
-    # Write this function
-    max_height = 0
-    # Your code here
-    return max_height
+    koks = [[] for i in range(n)]
+    for i in range(n):
+        parent_garums = parents[i]
+        if parent_garums == -1:
+            root_garums = i
+        else:
+            koks[parent_garums].append(i)
 
+    def atrast(node):
+        if not koks[node]:
+            return 1
+        garums = [atrast(child) for child in koks[node]]
+        return 1 + max(garums)
+    return atrast(root_garums)
 
 def main():
     # implement input form keyboard and from files
-    
+    ievade = input()
+    if "I" in ievade:
+         # input number of elements
+        n = int(input())
+        parents = list (map(int, input().split () ))
+    if "F" in ievade:
+        mape = './test/'
+        while True:
+            faila_nosaukums = input()
+            if "a" in faila_nosaukums:
+                print("Faila nosaukumā nevar būt burts 'a' ")
+            else:
+                break
+        vieta = mape + faila_nosaukums
+        with open(vieta, 'r') as f:
+            n = int(f.readline().strip())
+            parents = list(map(int, f.readline().strip().split()))
     # let user input file name to use, don't allow file names with letter a
     # account for github input inprecision
-    
-    # input number of elements
+
     # input values in one variable, separate with space, split these values in an array
     # call the function and output it's result
-    pass
+    result = compute_height(n, parents)
+    print(result)
 
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
