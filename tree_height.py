@@ -44,6 +44,7 @@ def main():
                 return
     else:
         print("Nepareiza ievade!")
+        return
 
     # account for github input inprecision
     # call the function and output it's result
