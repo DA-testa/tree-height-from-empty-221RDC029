@@ -4,18 +4,20 @@ import threading
 import numpy
 
 def compute_height(n, parents):
+    # Write this function
     koks = [[] for i in range(n)]
     for i in range(n):
         if parents[i] == -1:
             root_garums = i
         else:
             koks[parents[i]].append(i)
-
-    def atrast(mezgls):
+            
+    # Your code here
+    def max_height(mezgls):
         if not koks[mezgls]:
-            return i
-        return 1 + max(atrast(child) for child in koks[mezgls])
-    return atrast(root_garums)
+            return 1
+        return 1 + max(max_height(child) for child in koks[mezgls])
+    return max_height(root_garums)
 
 def main():
     # implement input form keyboard and from files
