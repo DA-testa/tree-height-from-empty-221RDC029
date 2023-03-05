@@ -20,36 +20,38 @@ def compute_height(n, parents):
     return max_height(root_garums)
 
 def main():
-    # implement input form keyboard and from files
-    ievade = input()
-    if "I" in ievade:
-         # input number of elements
-        n = int(input())
-    # input values in one variable, separate with space, split these values in an array
-        parents = list(map(int, input().split()))
-    elif "F" in ievade:
-        faila_nosaukums = input()
-        mape = 'test/'
-        # let user input file name to use, don't allow file names with letter a
-        if "a" in faila_nosaukums:
-            return
-        else:
-            # Nolasa vērtības no faila
-            try:
-                with open(mape + faila_nosaukums, 'r') as fails:
-                    n = int(fails.readline())
-                    parents = list(map(int, fails.readline().split()))
-            except Exception as exception:
-                print("Fails neeksistē", str(exception))
+    try:
+        # implement input form keyboard and from files
+        ievade = input()
+        if "I" in ievade:
+            # input number of elements
+            n = int(input())
+        # input values in one variable, separate with space, split these values in an array
+            parents = list(map(int, input().split()))
+        elif "F" in ievade:
+            faila_nosaukums = input()
+            mape = 'test/'
+            # let user input file name to use, don't allow file names with letter a
+            if "a" in faila_nosaukums:
                 return
-    else:
-        print("Nepareiza ievade!")
-        return
+            else:
+                # Nolasa vērtības no faila
+                try:
+                    with open(mape + faila_nosaukums, 'r') as fails:
+                        n = int(fails.readline())
+                        parents = list(map(int, fails.readline().split()))
+                except Exception as exception:
+                    print("Fails neeksistē", str(exception))
+                    return
+        else:
+            print("Nepareiza ievade!")
 
-    # account for github input inprecision
-    # call the function and output it's result
-    result = compute_height(n, parents)
-    print(result)
+        # account for github input inprecision
+        # call the function and output it's result
+        result = compute_height(n, parents)
+        print(result)
+    except EOFError:
+        return
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
 # of bigger stack, we have to launch the computation in a new thread.
