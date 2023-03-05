@@ -27,7 +27,7 @@ def main():
         n = int(input())
     # input values in one variable, separate with space, split these values in an array
         parents = list(map(int, input().split()))
-    if "F" in ievade:
+    elif "F" in ievade:
         faila_nosaukums = input()
         mape = 'test/'
         # let user input file name to use, don't allow file names with letter a
